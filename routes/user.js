@@ -4,9 +4,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const config = require("config");
 const _ = require("lodash");
-const { User } = require("../models/user");
+const { User } = require("../models/users");
 const auth = require("../middleware/auth");
-const isAdmin = require("../middleware/admin");
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -22,7 +21,7 @@ router.post("/register", async (req, res) => {
     await user.save();
     const token = jwt.sign(
       { _id: user._id, isAdmin: user.isAdmin },
-      config.get("jwtPrivateKey")
+     "fdas"
     );
     res
       .header("x-auth-token", token)
@@ -51,7 +50,7 @@ router.post("/login", async (req, res) => {
 
   const token = jwt.sign(
     { _id: user._id, isAdmin: user.isAdmin },
-    config.get("jwtPrivateKey")
+    "fdas"
   );
   res.header("x-auth-token").send(token);
 });

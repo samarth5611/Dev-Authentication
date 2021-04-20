@@ -3,13 +3,14 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const cookieParser = require("cookie-parser");
+const users = require("./routes/user")
 const cors = require("cors");
 const app = express();
 
-if (!config.get("jwtPrivateKey")) {
-  console.log("FATAL ERROR: JwtPrivateKey not defined");
-  process.exit(1);
-}
+// if (!config.get("jwtPrivateKey")) {
+//   console.log("FATAL ERROR: JwtPrivateKey not defined");
+//   process.exit(1);
+// }
 
 let mongoDB = "mongodb://127.0.0.1/forum";
 
@@ -29,13 +30,11 @@ app.use(cookieParser());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("request successfully sent!");
+  res.send("sent!");
 });
 
+
 app.use("/users", users);
-app.use("/posts", posts);
-app.use("/tags", tags);
-app.use("/reply", replies);
 
 const port = process.env.PORT || 4000;
 
